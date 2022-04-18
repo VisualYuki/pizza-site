@@ -7,11 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src=" {{ asset("js/app.js") }}" defer></script>
-
+    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
 </head>
 <body>
     <div id="app">
-        <example-component></example-component>
     </div>
 </body>
 </html>
