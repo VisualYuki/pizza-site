@@ -43,7 +43,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart() {
-      console.log("hello");
+      axios.post("/add-pizza-to-cart", {
+        id: this.pizzaInfo.id
+      });
     }
   }
 });

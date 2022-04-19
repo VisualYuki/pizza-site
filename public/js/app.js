@@ -5272,6 +5272,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App"
 });
@@ -5361,13 +5390,21 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
   base: process.env.BASE_URL,
   routes: [{
     path: "/",
+    redirect: "/home"
+  }, {
+    path: "/home",
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_IndexPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/IndexPage */ "./resources/js/vue/pages/IndexPage.vue"));
     }
   }, {
-    path: "/some",
+    path: "/cart",
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_IndexPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/IndexPage */ "./resources/js/vue/pages/IndexPage.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_CartPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/CartPage */ "./resources/js/vue/pages/CartPage.vue"));
+    }
+  }, {
+    path: "/order",
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_OrderPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/OrderPage */ "./resources/js/vue/pages/OrderPage.vue"));
     }
   }]
 })); // TODO: add route title page to all
@@ -27908,7 +27945,70 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mt-4" }, [_c("router-view")], 1)
+  return _c(
+    "div",
+    { staticClass: "container mt-4 mb-4" },
+    [
+      _c("header", { staticClass: "d-flex justify-content-center py-3" }, [
+        _c("ul", { staticClass: "nav nav-pills" }, [
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: {
+                    to: "/home",
+                    "active-class": "active",
+                    "aria-current": "page",
+                  },
+                },
+                [_vm._v("Home")]
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: { to: "/cart", "active-class": "active" },
+                },
+                [_vm._v("Cart\n                ")]
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: { to: "order", "active-class": "active" },
+                },
+                [_vm._v("Order")]
+              ),
+            ],
+            1
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("router-view"),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43347,7 +43447,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\My Server\\\\WWW\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_vue_pages_IndexPage_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_vue_pages_IndexPage_vue":1,"resources_js_vue_pages_CartPage_vue":1,"resources_js_vue_pages_OrderPage_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

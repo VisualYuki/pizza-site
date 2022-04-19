@@ -31,7 +31,9 @@ export default {
     },
     methods: {
         addToCart() {
-            console.log("hello");
+            axios.post("/add-pizza-to-cart", {
+                id: this.pizzaInfo.id,
+            });
         },
     },
 };

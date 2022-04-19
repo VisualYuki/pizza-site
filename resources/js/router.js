@@ -9,11 +9,19 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
+            redirect: "/home",
+        },
+        {
+            path: "/home",
             component: () => import("./vue/pages/IndexPage"),
         },
         {
-            path: "/some",
-            component: () => import("./vue/pages/IndexPage"),
+            path: "/cart",
+            component: () => import("./vue/pages/CartPage"),
+        },
+        {
+            path: "/order",
+            component: () => import("./vue/pages/OrderPage"),
         },
     ],
 });
