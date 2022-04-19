@@ -12,8 +12,6 @@ class CreatePizzaInfosTable extends Migration {
      * @return void
      */
     public function up() {
-
-
         Schema::create('pizza_infos', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string("name")->default("pizza-name-");
@@ -22,11 +20,6 @@ class CreatePizzaInfosTable extends Migration {
             //$table->boolean("isDiscount")->default(0);
             $table->timestamps();
         });
-
-
-
-
-
     }
 
     /**
