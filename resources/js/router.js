@@ -3,7 +3,7 @@ import Vue from "vue";
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
@@ -13,17 +13,26 @@ export default new VueRouter({
         },
         {
             path: "/home",
-            component: () => import("./vue/pages/IndexPage"),
+            component: () => import("./vue/pages/HomePage"),
+            meta: "Home",
         },
         {
             path: "/cart",
             component: () => import("./vue/pages/CartPage"),
+            meta: "Cart",
         },
         {
             path: "/order",
             component: () => import("./vue/pages/OrderPage"),
+            meta: "Order",
         },
     ],
 });
 
-// TODO: add route title page to all
+router.afterEach((to) => {
+    //Vue.nextTick(() => {
+    document.title = to.meta;
+    //});
+});
+
+export default router;
