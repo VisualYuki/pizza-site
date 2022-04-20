@@ -1,15 +1,17 @@
 <template>
-    <div class="col-6 col-md-3">
-        <div class="card">
+    <div class="col-6 col-md-4">
+        <div class="card h-100">
             <img src="/images/pizza-img.jpg" class="card-img-top" alt="" />
             <div class="card-body">
                 <h3 class="card-title">{{ pizzaInfo.name }}</h3>
                 <p class="card-text">
                     {{ pizzaInfo.desc }}
                 </p>
-                <div class="row mb-2">
-                    <div class="col">Price:</div>
-                    <div class="col fw-bold">{{ pizzaInfo.price }}</div>
+                <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                >
+                    <div class="h6">Price:</div>
+                    <div class="fw-bold h5">{{ pizzaInfo.price }} Руб.</div>
                 </div>
 
                 <a

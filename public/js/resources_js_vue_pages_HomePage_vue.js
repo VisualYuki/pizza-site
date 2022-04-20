@@ -43,6 +43,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PizzaItem",
   props: {
@@ -289,8 +291,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-6 col-md-3" }, [
-    _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "col-6 col-md-4" }, [
+    _c("div", { staticClass: "card h-100" }, [
       _c("img", {
         staticClass: "card-img-top",
         attrs: { src: "/images/pizza-img.jpg", alt: "" },
@@ -307,13 +309,20 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col" }, [_vm._v("Price:")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col fw-bold" }, [
-            _vm._v(_vm._s(_vm.pizzaInfo.price)),
-          ]),
-        ]),
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex justify-content-between align-items-center mb-2",
+          },
+          [
+            _c("div", { staticClass: "h6" }, [_vm._v("Price:")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "fw-bold h5" }, [
+              _vm._v(_vm._s(_vm.pizzaInfo.price) + " Руб."),
+            ]),
+          ]
+        ),
         _vm._v(" "),
         !_vm.pizzaInfo.in_cart
           ? _c(
@@ -364,7 +373,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row g-2" },
+    { staticClass: "row g-3 align-items-stretch" },
     [
       !_vm.pizzaInfos
         ? [_vm._m(0), _vm._v(" "), _c("p", [_vm._v("loading ...")])]

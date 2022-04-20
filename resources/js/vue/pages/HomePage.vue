@@ -1,5 +1,5 @@
 <template>
-    <div class="row g-2">
+    <div class="row g-3 align-items-stretch">
         <template v-if="!pizzaInfos">
             <div
                 class="spinner-border"
