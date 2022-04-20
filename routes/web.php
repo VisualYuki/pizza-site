@@ -14,9 +14,7 @@ use \Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get("/create-pizza-info-item", "CreatePizzaItem");
-
-Route::get("/test", function (Request $request) {
+Route::get("/view-sql", function (Request $request) {
     DB::enableQueryLog();
 
     $result = DB::table("carts")->where("id", 1)->update(["created_at" => "1212"]);

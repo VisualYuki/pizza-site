@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::get("/pizzas", "PizzasController");
-
 Route::get("/cart", "CartController@index");
 Route::post("/cart/add", "CartController@add");
 Route::post("/cart/remove", "CartController@remove");
