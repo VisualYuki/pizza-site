@@ -19,15 +19,17 @@ Route::get("/create-pizza-info-item", "CreatePizzaItem");
 Route::get("/test", function (Request $request) {
     DB::enableQueryLog();
 
-
-    $result = DB::table("carts")->count();
+    $result = DB::table("carts")->where("id", 1)->update(["created_at" => "1212"]);
     //$result = DB::table("pizzas")->union(DB::table("carts"))->get();
     echo DB::getQueryLog()[0]["query"];
     var_dump($result);
 });
 
-Route::fallback(function () {
-    return view("index");
-});
+Route::view("/", "index");
+Route::view("/{page}", "index");
+
+//Route::fallback(function () {
+//    return view("index");
+//});
 
 

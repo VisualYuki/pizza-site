@@ -5403,13 +5403,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_CartPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/CartPage */ "./resources/js/vue/pages/CartPage.vue"));
     },
     meta: "Cart"
-  }, {
-    path: "/order",
-    component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_vue_pages_OrderPage_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./vue/pages/OrderPage */ "./resources/js/vue/pages/OrderPage.vue"));
-    },
-    meta: "Order"
-  }]
+  } //{
+  //    path: "/order",
+  //    component: () => import("./vue/pages/OrderPage"),
+  //    meta: "Order",
+  //},
+  ]
 });
 router.afterEach(function (to) {
   //Vue.nextTick(() => {
@@ -43455,7 +43454,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\My Server\\\\WWW\\
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_vue_pages_HomePage_vue":1,"resources_js_vue_pages_CartPage_vue":1,"resources_js_vue_pages_OrderPage_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_vue_pages_HomePage_vue":1,"resources_js_vue_pages_CartPage_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

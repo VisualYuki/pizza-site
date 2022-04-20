@@ -21,11 +21,11 @@ const router = new VueRouter({
             component: () => import("./vue/pages/CartPage"),
             meta: "Cart",
         },
-        {
-            path: "/order",
-            component: () => import("./vue/pages/OrderPage"),
-            meta: "Order",
-        },
+        //{
+        //    path: "/order",
+        //    component: () => import("./vue/pages/OrderPage"),
+        //    meta: "Order",
+        //},
     ],
 });
 
