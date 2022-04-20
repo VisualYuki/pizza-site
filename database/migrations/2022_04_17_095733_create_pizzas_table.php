@@ -3,21 +3,24 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\PizzaInfos;
 
-class CreatePizzaInfosTable extends Migration {
+
+class CreatePizzasTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('pizza_infos', function (Blueprint $table) {
+        Schema::create('pizzas', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string("name")->default("pizza-name-");
             $table->string("desc")->default("pizza-desc-");
             $table->smallInteger("price")->default("999");
-            //$table->boolean("isDiscount")->default(0);
+            $table->boolean("in_cart")->default(0);
+//            $table->unsignedBigInteger("cart_id");
+//            $table->foreign("cart_id")->references("id")->on("carts")->onDelete("cascade");
+
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreatePizzaInfosTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('pizza_infos');
+        Schema::dropIfExists('pizzas');
     }
 }

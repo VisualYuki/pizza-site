@@ -12,9 +12,19 @@
                     <div class="col fw-bold">{{ pizzaInfo.price }}</div>
                 </div>
 
-                <a href="#" class="btn btn-primary" @click="addToCart"
+                <a
+                    href="#"
+                    v-if="!pizzaInfo.in_cart"
+                    class="btn btn-primary"
+                    @click="addToCart"
                     >Add to cart</a
                 >
+                <p v-else>
+                    Already in cart
+                    <span class="btn btn-primary" @click="removeFromCart"
+                        >Remove from cart</span
+                    >
+                </p>
             </div>
         </div>
     </div>
@@ -31,9 +41,22 @@ export default {
     },
     methods: {
         addToCart() {
-            axios.post("/add-pizza-to-cart", {
-                id: this.pizzaInfo.id,
-            });
+            axios
+                .post("/api/cart/add", {
+                    id: this.pizzaInfo.id,
+                })
+                .then((response) => {
+                    this.$emit("refresh");
+                });
+        },
+        removeFromCart() {
+            axios
+                .post("/api/cart/remove", {
+                    id: this.pizzaInfo.id,
+                })
+                .then((response) => {
+                    this.$emit("refresh");
+                });
         },
     },
 };
