@@ -18,4 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/pizza-infos", "PizzaInfosController");
+Route::get("/pizzas", "PizzasController");
+
+Route::get("/cart", "CartController@index");
+Route::post("/cart/add", "CartController@add");
+Route::post("/cart/remove", "CartController@remove");
+Route::get("/cart/count", "CartController@count");
+Route::get("/cart/total-price", "CartController@totalPrice");
+
+

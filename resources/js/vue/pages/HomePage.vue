@@ -15,6 +15,7 @@
                 v-for="(pizzaInfo, index) in pizzaInfos"
                 :pizzaInfo="pizzaInfo"
                 :key="index"
+                @refresh="refresh"
             />
         </template>
     </div>
@@ -34,9 +35,14 @@ export default {
         };
     },
     mounted() {
-        axios.get("/api/pizza-infos").then((response) => {
-            this.pizzaInfos = response.data;
-        });
+        this.refresh();
+    },
+    methods: {
+        refresh() {
+            axios.get("/api/pizzas").then((response) => {
+                this.pizzaInfos = response.data;
+            });
+        },
     },
 };
 </script>

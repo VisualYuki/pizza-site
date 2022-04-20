@@ -33,6 +33,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PizzaItem",
   props: {
@@ -43,8 +53,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart() {
-      axios.post("/add-pizza-to-cart", {
+      var _this = this;
+
+      axios.post("/api/cart/add", {
         id: this.pizzaInfo.id
+      }).then(function (response) {
+        _this.$emit("refresh");
+      });
+    },
+    removeFromCart: function removeFromCart() {
+      var _this2 = this;
+
+      axios.post("/api/cart/remove", {
+        id: this.pizzaInfo.id
+      }).then(function (response) {
+        _this2.$emit("refresh");
       });
     }
   }
@@ -85,6 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomePage",
@@ -97,11 +121,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.refresh();
+  },
+  methods: {
+    refresh: function refresh() {
+      var _this = this;
 
-    axios.get("/api/pizza-infos").then(function (response) {
-      _this.pizzaInfos = response.data;
-    });
+      axios.get("/api/pizzas").then(function (response) {
+        _this.pizzaInfos = response.data;
+      });
+    }
   }
 });
 
@@ -286,15 +315,27 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { href: "#" },
-            on: { click: _vm.addToCart },
-          },
-          [_vm._v("Add to cart")]
-        ),
+        !_vm.pizzaInfo.in_cart
+          ? _c(
+              "a",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { href: "#" },
+                on: { click: _vm.addToCart },
+              },
+              [_vm._v("Add to cart")]
+            )
+          : _c("p", [
+              _vm._v("\n                Already in cart\n                "),
+              _c(
+                "span",
+                {
+                  staticClass: "btn btn-primary",
+                  on: { click: _vm.removeFromCart },
+                },
+                [_vm._v("Remove from cart")]
+              ),
+            ]),
       ]),
     ]),
   ])
@@ -331,6 +372,7 @@ var render = function () {
             return _c("PizzaItem", {
               key: index,
               attrs: { pizzaInfo: pizzaInfo },
+              on: { refresh: _vm.refresh },
             })
           }),
     ],

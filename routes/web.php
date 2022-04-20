@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::view("{page}", "index");
-//Route::get("/{page}", function(){
-//    return view("index");
-//});
+Route::get("/create-pizza-info-item", "CreatePizzaItem");
 
-Route::get("/create-pizza-info-item", "CreatePizzaInfoItem");
+Route::get("/test", function (Request $request) {
+    DB::enableQueryLog();
+
+
+    $result = DB::table("carts")->count();
+    //$result = DB::table("pizzas")->union(DB::table("carts"))->get();
+    echo DB::getQueryLog()[0]["query"];
+    var_dump($result);
+});
 
 Route::fallback(function () {
     return view("index");
 });
+
+

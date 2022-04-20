@@ -1,10 +1,58 @@
 <template>
-    <div>cart page</div>
+    <div>
+        <template v-if="count">
+            <RowPizzaItem
+                v-for="(item, index) in cartPizzas"
+                :pizzaInfo="item"
+                :key="index"
+                @refresh="refresh"
+            ></RowPizzaItem>
+            <p>Total price : {{ totalPrice }}</p>
+        </template>
+        <template v-else> Empty cart </template>
+    </div>
 </template>
 
 <script>
+import RowPizzaItem from "../components/RowPizzaItem.vue";
+
 export default {
     name: "CartPage",
+    components: {
+        RowPizzaItem,
+    },
+    data() {
+        return {
+            cartPizzas: null,
+            count: 0,
+            totalPrice: 0,
+        };
+    },
+
+    mounted() {
+        this.refresh();
+        this.getCount();
+        this.getTotalPrice();
+    },
+    methods: {
+        refresh() {
+            axios.get("/api/cart").then((response) => {
+                this.cartPizzas = response.data;
+            });
+            this.getCount();
+            this.getTotalPrice();
+        },
+        getCount() {
+            axios.get("/api/cart/count").then((response) => {
+                this.count = response.data;
+            });
+        },
+        getTotalPrice() {
+            axios.get("/api/cart/total-price").then((response) => {
+                this.totalPrice = response.data;
+            });
+        },
+    },
 };
 </script>
 
