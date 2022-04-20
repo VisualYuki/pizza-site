@@ -45,6 +45,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PizzaItem",
   props: {
@@ -319,32 +323,27 @@ var render = function () {
             _c("div", { staticClass: "h6" }, [_vm._v("Price:")]),
             _vm._v(" "),
             _c("div", { staticClass: "fw-bold h5" }, [
-              _vm._v(_vm._s(_vm.pizzaInfo.price) + " Руб."),
+              _vm._v(_vm._s(_vm.pizzaInfo.price) + " Rub."),
             ]),
           ]
         ),
         _vm._v(" "),
-        !_vm.pizzaInfo.in_cart
-          ? _c(
-              "a",
-              {
-                staticClass: "btn btn-primary",
-                attrs: { href: "#" },
-                on: { click: _vm.addToCart },
-              },
-              [_vm._v("Add to cart")]
-            )
-          : _c("p", [
-              _vm._v("\n                Already in cart\n                "),
-              _c(
-                "span",
-                {
-                  staticClass: "btn btn-primary",
-                  on: { click: _vm.removeFromCart },
-                },
-                [_vm._v("Remove from cart")]
-              ),
-            ]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary",
+            class: {
+              disabled: _vm.pizzaInfo.in_cart,
+              "btn-danger text-danger": _vm.pizzaInfo.in_cart,
+            },
+            on: { click: _vm.addToCart },
+          },
+          [
+            _vm.pizzaInfo.in_cart
+              ? _c("span", [_vm._v(" Already in cart ")])
+              : _c("span", [_vm._v("Add to cart")]),
+          ]
+        ),
       ]),
     ]),
   ])

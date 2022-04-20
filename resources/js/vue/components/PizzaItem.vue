@@ -11,22 +11,26 @@
                     class="d-flex justify-content-between align-items-center mb-2"
                 >
                     <div class="h6">Price:</div>
-                    <div class="fw-bold h5">{{ pizzaInfo.price }} Руб.</div>
+                    <div class="fw-bold h5">{{ pizzaInfo.price }} Rub.</div>
                 </div>
 
-                <a
-                    href="#"
-                    v-if="!pizzaInfo.in_cart"
-                    class="btn btn-primary"
+                <button
+                    :class="{
+                        disabled: pizzaInfo.in_cart,
+                        'btn-danger text-danger': pizzaInfo.in_cart,
+                    }"
+                    class="btn btn-outline-primary"
                     @click="addToCart"
-                    >Add to cart</a
                 >
-                <p v-else>
+                    <span v-if="pizzaInfo.in_cart"> Already in cart </span>
+                    <span v-else>Add to cart</span>
+                </button>
+                <!--<p v-else>
                     Already in cart
                     <span class="btn btn-primary" @click="removeFromCart"
                         >Remove from cart</span
                     >
-                </p>
+                </p>-->
             </div>
         </div>
     </div>

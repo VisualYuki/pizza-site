@@ -7,7 +7,10 @@
                 :key="index"
                 @refresh="refresh"
             ></RowPizzaItem>
-            <p>Total price : {{ totalPrice }}</p>
+            <p class="h3 mt-4" style="text-align: center">
+                Total price :
+                <span class="fw-bold">{{ totalPrice }} Rub.</span>
+            </p>
         </template>
         <template v-else> Empty cart </template>
     </div>

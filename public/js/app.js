@@ -27993,22 +27993,6 @@ var render = function () {
             ],
             1
           ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link",
-                  attrs: { to: "order", "active-class": "active" },
-                },
-                [_vm._v("Order")]
-              ),
-            ],
-            1
-          ),
         ]),
       ]),
       _vm._v(" "),

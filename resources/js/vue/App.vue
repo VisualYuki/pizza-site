@@ -19,14 +19,14 @@
                         >Cart
                     </router-link>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <router-link
                         to="order"
                         class="nav-link"
                         active-class="active"
                         >Order</router-link
                     >
-                </li>
+                </li>-->
             </ul>
         </header>
         <router-view />

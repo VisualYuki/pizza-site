@@ -29,6 +29,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PizzaItem",
   props: {
@@ -63,6 +82,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_RowPizzaItem_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/RowPizzaItem.vue */ "./resources/js/vue/components/RowPizzaItem.vue");
+//
+//
+//
 //
 //
 //
@@ -278,23 +300,64 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mb-2" }, [
+  return _c("div", { staticClass: "card mb-2 p-3" }, [
     _c("div", { staticClass: "row" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "col d-flex align-items-center" }, [
-        _c("h3", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.pizzaInfo.name)),
-        ]),
-      ]),
+      _c(
+        "div",
+        {
+          staticClass:
+            "col-6 col d-flex align-items-center justify-content-center flex-column",
+        },
+        [
+          _c("h3", { staticClass: "card-title text-nowrap mb-2" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.pizzaInfo.name) +
+                "\n            "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.pizzaInfo.desc) +
+                "\n            "
+            ),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex justify-content-between align-items-center mb-2",
+            },
+            [
+              _c("div", { staticClass: "h6 me-2" }, [_vm._v("Price:")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "fw-bold h5" }, [
+                _vm._v(_vm._s(_vm.pizzaInfo.price) + " Rub."),
+              ]),
+            ]
+          ),
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "col d-flex align-items-center" }, [
-        _c(
-          "span",
-          { staticClass: "btn btn-primary", on: { click: _vm.removeFromCart } },
-          [_vm._v("Remove from cart")]
-        ),
-      ]),
+      _c(
+        "div",
+        { staticClass: "col-1 d-flex align-items-center justify-content-end" },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              on: { click: _vm.removeFromCart },
+            },
+            [_vm._v("\n                ×\n            ")]
+          ),
+        ]
+      ),
     ]),
   ])
 }
@@ -303,10 +366,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
+    return _c("div", { staticClass: "col-3" }, [
       _c("img", {
-        staticClass: "card-img-top",
-        attrs: { src: "/images/pizza-img.jpg", alt: "" },
+        staticStyle: { height: "150px" },
+        attrs: { src: "/images/pizza-img.jpg" },
       }),
     ])
   },
@@ -345,7 +408,19 @@ var render = function () {
               })
             }),
             _vm._v(" "),
-            _c("p", [_vm._v("Total price : " + _vm._s(_vm.totalPrice))]),
+            _c(
+              "p",
+              {
+                staticClass: "h3 mt-4",
+                staticStyle: { "text-align": "center" },
+              },
+              [
+                _vm._v("\n            Total price :\n            "),
+                _c("span", { staticClass: "fw-bold" }, [
+                  _vm._v(_vm._s(_vm.totalPrice) + " Rub."),
+                ]),
+              ]
+            ),
           ]
         : [_vm._v(" Empty cart ")],
     ],
