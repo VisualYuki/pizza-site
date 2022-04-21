@@ -4,12 +4,12 @@
             <div class="col-3">
                 <img
                     src="/images/pizza-img.jpg"
-                    class=""
+                    class="d-md-block d-none"
                     style="height: 150px"
                 />
             </div>
             <div
-                class="col-6 col d-flex align-items-center justify-content-center flex-column"
+                class="col-10 col-md-6 col d-flex align-items-start justify-content-center flex-column"
             >
                 <h3 class="card-title text-nowrap mb-2">
                     {{ pizzaInfo.name }}

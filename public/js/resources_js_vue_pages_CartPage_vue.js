@@ -321,7 +321,7 @@ var render = function () {
         "div",
         {
           staticClass:
-            "col-6 col d-flex align-items-center justify-content-center flex-column",
+            "col-10 col-md-6 col d-flex align-items-start justify-content-center flex-column",
         },
         [
           _c("h3", { staticClass: "card-title text-nowrap mb-2" }, [
@@ -381,6 +381,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-3" }, [
       _c("img", {
+        staticClass: "d-md-block d-none",
         staticStyle: { height: "150px" },
         attrs: { src: "/images/pizza-img.jpg" },
       }),

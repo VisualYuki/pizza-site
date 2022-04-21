@@ -27993,6 +27993,22 @@ var render = function () {
             ],
             1
           ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "nav-item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-link",
+                  attrs: { to: "order", "active-class": "active" },
+                },
+                [_vm._v("Order")]
+              ),
+            ],
+            1
+          ),
         ]),
       ]),
       _vm._v(" "),
@@ -43405,6 +43421,18 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\My Server\\\\WWW\\
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
