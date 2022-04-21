@@ -11,19 +11,13 @@ class CreateCartsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('cart', function (Blueprint $table) {
             $table->id();
             $table->foreignId("pizzas_id")->default(1)->constrained();
             $table->timestamps();
         });
 
-//        \App\Models\Cart::create([
-//            "pizzas_id" => "1"
-//        ]);
-//
-//        \App\Models\Cart::create([
-//            "pizzas_id" => "2"
-//        ]);
+        // TODO: add fake data
     }
 
     /**
@@ -32,6 +26,6 @@ class CreateCartsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('cart');
     }
 }

@@ -18,7 +18,6 @@ Route::get("/view-sql", function (Request $request) {
     DB::enableQueryLog();
 
     $result = DB::table("carts")->where("id", 1)->update(["created_at" => "1212"]);
-    //$result = DB::table("pizzas")->union(DB::table("carts"))->get();
 
     echo DB::getQueryLog()[0]["query"];
     var_dump($result);

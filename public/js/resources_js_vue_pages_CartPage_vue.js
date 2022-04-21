@@ -100,6 +100,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CartPage",
@@ -110,7 +121,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       cartPizzas: null,
       count: 0,
-      totalPrice: 0
+      totalPrice: 0,
+      isLoading: true
     };
   },
   mounted: function mounted() {
@@ -124,6 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/cart").then(function (response) {
         _this.cartPizzas = response.data;
+        _this.isLoading = false;
       });
       this.getCount();
       this.getTotalPrice();
@@ -398,36 +411,57 @@ var render = function () {
   return _c(
     "div",
     [
-      _vm.count
-        ? [
-            _vm._l(_vm.cartPizzas, function (item, index) {
-              return _c("RowPizzaItem", {
-                key: index,
-                attrs: { pizzaInfo: item },
-                on: { refresh: _vm.refresh },
-              })
-            }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "h3 mt-4",
-                staticStyle: { "text-align": "center" },
-              },
-              [
-                _vm._v("\n            Total price :\n            "),
-                _c("span", { staticClass: "fw-bold" }, [
-                  _vm._v(_vm._s(_vm.totalPrice) + " Rub."),
-                ]),
-              ]
-            ),
-          ]
-        : [_vm._v(" Empty cart ")],
+      _vm.isLoading
+        ? [_vm._m(0)]
+        : [
+            _vm.count
+              ? [
+                  _vm._l(_vm.cartPizzas, function (item, index) {
+                    return _c("RowPizzaItem", {
+                      key: index,
+                      attrs: { pizzaInfo: item },
+                      on: { refresh: _vm.refresh },
+                    })
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass: "h3 mt-4",
+                      staticStyle: { "text-align": "center" },
+                    },
+                    [
+                      _vm._v(
+                        "\n                Total price :\n                "
+                      ),
+                      _c("span", { staticClass: "fw-bold" }, [
+                        _vm._v(_vm._s(_vm.totalPrice) + " Rub."),
+                      ]),
+                    ]
+                  ),
+                ]
+              : [_vm._v(" Empty cart ")],
+          ],
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "spinner-border",
+        staticStyle: { width: "5rem", height: "5rem" },
+        attrs: { role: "status" },
+      },
+      [_c("span", { staticClass: "visually-hidden" }, [_vm._v("Loading...")])]
+    )
+  },
+]
 render._withStripped = true
 
 

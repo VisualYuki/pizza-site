@@ -114,7 +114,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomePage",
@@ -375,7 +374,7 @@ var render = function () {
     { staticClass: "row g-3 align-items-stretch" },
     [
       !_vm.pizzaInfos
-        ? [_vm._m(0), _vm._v(" "), _c("p", [_vm._v("loading ...")])]
+        ? [_vm._m(0)]
         : _vm._l(_vm.pizzaInfos, function (pizzaInfo, index) {
             return _c("PizzaItem", {
               key: index,

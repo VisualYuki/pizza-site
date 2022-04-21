@@ -8,7 +8,6 @@
             >
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <p>loading ...</p>
         </template>
         <template v-else>
             <PizzaItem
