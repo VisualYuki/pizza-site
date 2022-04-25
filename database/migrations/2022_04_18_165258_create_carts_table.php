@@ -4,19 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartsTable extends Migration {
+class CreateCartsTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('cart', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("pizzas_id")->default(1)->constrained();
-            $table->timestamps();
+            $table->foreignId("user_id")->constrained("users", "user_id");
+            $table->unsignedBigInteger("pizza_id");
         });
-
         // TODO: add fake data
     }
 
@@ -25,7 +26,8 @@ class CreateCartsTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-        Schema::dropIfExists('cart');
+    public function down()
+    {
+        Schema::dropIfExists('carts');
     }
 }

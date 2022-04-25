@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         refresh() {
-            axios.get("/api/pizzas").then((response) => {
+            axios.get("/api/products").then((response) => {
                 this.pizzaInfos = response.data;
             });
         },

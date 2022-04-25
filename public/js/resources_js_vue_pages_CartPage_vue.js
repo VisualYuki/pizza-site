@@ -111,6 +111,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CartPage",
@@ -122,7 +179,15 @@ __webpack_require__.r(__webpack_exports__);
       cartPizzas: null,
       count: 0,
       totalPrice: 0,
-      isLoading: true
+      isLoading: true,
+      form: {
+        name: null,
+        phone: null,
+        street: null,
+        comment: null
+      },
+      isError: false,
+      errorMessages: undefined
     };
   },
   mounted: function mounted() {
@@ -131,28 +196,43 @@ __webpack_require__.r(__webpack_exports__);
     this.getTotalPrice();
   },
   methods: {
-    refresh: function refresh() {
+    buy: function buy() {
       var _this = this;
 
+      axios.post("/api/cart/buy", {
+        name: this.form.name,
+        phone: this.form.phone,
+        street: this.form.street,
+        comment: this.form.comment
+      }).then(function (response) {
+        _this.$router.push("/order");
+      })["catch"](function (error) {
+        _this.isError = true;
+        _this.errorMessages = error.response.data.errors;
+      });
+    },
+    refresh: function refresh() {
+      var _this2 = this;
+
       axios.get("/api/cart").then(function (response) {
-        _this.cartPizzas = response.data;
-        _this.isLoading = false;
+        _this2.cartPizzas = response.data;
+        _this2.isLoading = false;
       });
       this.getCount();
       this.getTotalPrice();
     },
     getCount: function getCount() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/cart/count").then(function (response) {
-        _this2.count = response.data;
+        _this3.count = response.data;
       });
     },
     getTotalPrice: function getTotalPrice() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/api/cart/total-price").then(function (response) {
-        _this3.totalPrice = response.data;
+        _this4.totalPrice = response.data;
       });
     }
   }
@@ -426,18 +506,166 @@ var render = function () {
                   }),
                   _vm._v(" "),
                   _c(
-                    "p",
+                    "div",
                     {
-                      staticClass: "h3 mt-4",
-                      staticStyle: { "text-align": "center" },
+                      staticClass: "p-4 mt-4 border border-info rounded",
+                      staticStyle: {
+                        background: "white",
+                        "max-width": "700px",
+                        margin: "0 auto",
+                      },
                     },
                     [
-                      _vm._v(
-                        "\n                Total price :\n                "
-                      ),
-                      _c("span", { staticClass: "fw-bold" }, [
-                        _vm._v(_vm._s(_vm.totalPrice) + " Rub."),
+                      _c("div", { staticClass: "mb-3" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.name,
+                              expression: "form.name",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Name" },
+                          domProps: { value: _vm.form.name },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "name", $event.target.value)
+                            },
+                          },
+                        }),
                       ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-3" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.phone,
+                              expression: "form.phone",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "phone", placeholder: "Phone" },
+                          domProps: { value: _vm.form.phone },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "phone", $event.target.value)
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-3" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.street,
+                              expression: "form.street",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "Street" },
+                          domProps: { value: _vm.form.street },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "street", $event.target.value)
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mb-3" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.comment,
+                              expression: "form.comment",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            rows: "3",
+                            name: "comment",
+                            placeholder: "Comment",
+                          },
+                          domProps: { value: _vm.form.comment },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "comment", $event.target.value)
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "h3 mt-5",
+                          staticStyle: { "text-align": "center" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Total price :\n                    "
+                          ),
+                          _c("span", { staticClass: "fw-bold" }, [
+                            _vm._v(_vm._s(_vm.totalPrice) + " Rub."),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          staticStyle: { margin: "0 auto", display: "block" },
+                          on: { click: _vm.buy },
+                        },
+                        [_vm._v("\n                    Buy\n                ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "text-danger" },
+                        [
+                          _vm._l(
+                            _vm.errorMessages,
+                            function (errorMessageArray) {
+                              return [
+                                _vm._l(
+                                  errorMessageArray,
+                                  function (errorMessage) {
+                                    return [
+                                      _c("span", { key: errorMessage }, [
+                                        _vm._v(_vm._s(errorMessage)),
+                                      ]),
+                                    ]
+                                  }
+                                ),
+                              ]
+                            }
+                          ),
+                        ],
+                        2
+                      ),
                     ]
                   ),
                 ]

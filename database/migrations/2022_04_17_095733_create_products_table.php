@@ -5,23 +5,23 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use \Illuminate\Support\Facades\DB;
 
-class CreatePizzasTable extends Migration {
+class CreateProductsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('pizzas', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string("name")->default("pizza-name-");
             $table->string("desc")->default("pizza-desc-");
             $table->smallInteger("price")->default("999");
-            $table->boolean("in_cart")->default(0);
-            $table->timestamps();
+            //$table->boolean("in_cart")->default(0);
+
         });
 
-        DB::table("pizzas")->insert([
+        DB::table("products")->insert([
             [
                 "name" => "Сливочный лосось",
                 "desc" => "Сыр 'Моцарелла', нежный лосось, сочные томаты, сливочный соус и итальянские травы",
@@ -60,6 +60,6 @@ class CreatePizzasTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('pizzas');
+        Schema::dropIfExists('product');
     }
 }

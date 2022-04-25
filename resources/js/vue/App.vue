@@ -29,6 +29,7 @@
                 </li>
             </ul>
         </header>
+
         <router-view />
     </div>
 </template>
@@ -36,5 +37,16 @@
 <script>
 export default {
     name: "App",
+    mounted() {
+        let userId = localStorage.getItem("userId");
+
+        axios
+            .post("/api/set-user-id-cookie", {
+                userId: userId,
+            })
+            .then((response) => {
+                localStorage.setItem("userId", response.data);
+            });
+    },
 };
 </script>

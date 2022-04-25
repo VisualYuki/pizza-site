@@ -18,11 +18,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/pizzas", "PizzasController");
+Route::get("/products", "ProductController");
+Route::post("/set-user-id-cookie", "UserController@setUserIdCookie");
+
 Route::get("/cart", "CartController@index");
 Route::post("/cart/add", "CartController@add");
 Route::post("/cart/remove", "CartController@remove");
 Route::get("/cart/count", "CartController@count");
 Route::get("/cart/total-price", "CartController@totalPrice");
+Route::post("/cart/buy", "CartController@buy");
+
+Route::get("/order", "OrderController@index");
 
 

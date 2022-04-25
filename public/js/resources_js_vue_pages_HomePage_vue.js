@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
     refresh: function refresh() {
       var _this = this;
 
-      axios.get("/api/pizzas").then(function (response) {
+      axios.get("/api/products").then(function (response) {
         _this.pizzaInfos = response.data;
       });
     }
