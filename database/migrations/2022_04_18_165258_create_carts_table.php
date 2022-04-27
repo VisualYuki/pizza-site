@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained("users", "user_id");
-            $table->unsignedBigInteger("pizza_id");
+            $table->unsignedBigInteger("product_id");
         });
         // TODO: add fake data
     }

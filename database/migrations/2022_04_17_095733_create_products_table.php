@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration {
             $table->string("desc")->default("pizza-desc-");
             $table->smallInteger("price")->default("999");
             //$table->boolean("in_cart")->default(0);
-
         });
 
         DB::table("products")->insert([

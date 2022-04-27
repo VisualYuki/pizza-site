@@ -21,14 +21,16 @@ class CartController extends Controller
 
         DB::table("carts")->updateOrInsert([
             "user_id" => $userId,
-            "pizza_id" => $request->id
+            "product_id" => $request->id
         ]);
     }
 
     public function remove(Request $request)
     {
-        DB::table("carts")->where("product_id", "=", $request->id)->delete();
-        DB::table("products")->where("id", $request->id)->update(["in_cart" => 0]);
+        $userId = $_COOKIE["userId"];
+
+        DB::table("carts")->where("user_id", $userId)-> where("product_id", "=", $request->id)->delete();
+        //DB::table("products")->where("id", $request->id)->update(["in_cart" => 0]);
     }
 
     public function count(Request $request)
@@ -45,7 +47,7 @@ class CartController extends Controller
     {
         $userId = $_COOKIE["userId"];
 
-        return DB::table("carts")->where("user_id", "=", $userId)->leftJoin("products", "carts.pizza_id", "=", "products.id");
+        return DB::table("carts")->where("user_id", "=", $userId)->leftJoin("products", "carts.product_id", "=", "products.id");
     }
 
     public function buy(Request $request)
@@ -75,7 +77,7 @@ class CartController extends Controller
         foreach ($productItems as $productItem) {
             DB::table("product-orders")->insert([
                 "order_id" => $orderId,
-                "product_id" => $productItem->pizza_id
+                "product_id" => $productItem->product_id
             ]);
         }
 
