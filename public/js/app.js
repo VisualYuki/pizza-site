@@ -28013,7 +28013,7 @@ var render = function () {
                   staticClass: "nav-link",
                   attrs: { to: "order", "active-class": "active" },
                 },
-                [_vm._v("Order")]
+                [_vm._v("Orders")]
               ),
             ],
             1

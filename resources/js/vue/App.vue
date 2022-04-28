@@ -24,7 +24,7 @@
                         to="order"
                         class="nav-link"
                         active-class="active"
-                        >Order</router-link
+                        >Orders</router-link
                     >
                 </li>
             </ul>

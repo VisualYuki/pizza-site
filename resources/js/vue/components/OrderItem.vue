@@ -1,8 +1,13 @@
 <template>
     <tr>
-        <th scope="row">{{ orderItem.order_id }}</th>
+        <td scope="row">{{ orderItem.id }}</td>
         <td>{{ orderItem.registration_date }}</td>
-        <td>-</td>
+        <td>
+            <div v-for="(product, index) in orderItem.products" :key="index">
+                {{ product.name }} {{ product.price }} Rub. -
+                {{ product.count }}x
+            </div>
+        </td>
         <td>{{ orderItem.total_price }} Rub.</td>
         <td>{{ orderItem.phone }}</td>
         <td>{{ orderItem.street }}</td>
@@ -21,4 +26,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+td {
+    vertical-align: middle;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div class="row g-3 align-items-stretch">
-        <template v-if="!pizzaInfos">
+        <template v-if="!productItems">
             <div
                 class="spinner-border"
                 style="width: 5rem; height: 5rem"
@@ -10,9 +10,9 @@
             </div>
         </template>
         <template v-else>
-            <PizzaItem
-                v-for="(pizzaInfo, index) in pizzaInfos"
-                :pizzaInfo="pizzaInfo"
+            <ProductItem
+                v-for="(productInfo, index) in productItems"
+                :productInfo="productInfo"
                 :key="index"
                 @refresh="refresh"
             />
@@ -21,16 +21,16 @@
 </template>
 
 <script>
-import PizzaItem from "../components/PizzaItem.vue";
+import ProductItem from "../components/ProductItem.vue";
 
 export default {
     name: "HomePage",
     components: {
-        PizzaItem,
+        ProductItem,
     },
     data() {
         return {
-            pizzaInfos: null,
+            productItems: null,
         };
     },
     mounted() {
@@ -39,7 +39,7 @@ export default {
     methods: {
         refresh() {
             axios.get("/api/products").then((response) => {
-                this.pizzaInfos = response.data;
+                this.productItems = response.data;
             });
         },
     },

@@ -11,12 +11,12 @@
         </template>
         <template v-else>
             <template v-if="count">
-                <RowPizzaItem
-                    v-for="(item, index) in cartPizzas"
-                    :pizzaInfo="item"
+                <RowProductItem
+                    v-for="(item, index) in cartProducts"
+                    :productInfo="item"
                     :key="index"
                     @refresh="refresh"
-                ></RowPizzaItem>
+                ></RowProductItem>
 
                 <div
                     class="p-4 mt-4 border border-info rounded"
@@ -85,23 +85,22 @@
 </template>
 
 <script>
-import RowPizzaItem from "../components/RowPizzaItem.vue";
+import RowProductItem from "../components/RowProductItem.vue";
 
 export default {
     name: "CartPage",
     components: {
-        RowPizzaItem,
+        RowProductItem,
     },
     data() {
         return {
-            cartPizzas: null,
-            count: 0,
+            cartProducts: null,
             totalPrice: 0,
             isLoading: true,
             form: {
-                name: null,
-                phone: null,
-                street: null,
+                name: "denis",
+                phone: "89123323010",
+                street: "street for delivary",
                 comment: null,
             },
             isError: false,
@@ -111,8 +110,11 @@ export default {
 
     mounted() {
         this.refresh();
-        this.getCount();
-        this.getTotalPrice();
+    },
+    computed: {
+        count() {
+            return this.cartProducts.length;
+        },
     },
     methods: {
         buy() {
@@ -134,16 +136,11 @@ export default {
         },
         refresh() {
             axios.get("/api/cart").then((response) => {
-                this.cartPizzas = response.data;
+                this.cartProducts = response.data;
                 this.isLoading = false;
             });
-            this.getCount();
+
             this.getTotalPrice();
-        },
-        getCount() {
-            axios.get("/api/cart/count").then((response) => {
-                this.count = response.data;
-            });
         },
         getTotalPrice() {
             axios.get("/api/cart/total-price").then((response) => {

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\DB;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +21,11 @@ Route::get("/view-sql", function (Request $request) {
 
     echo DB::getQueryLog()[0]["query"];
     var_dump($result);
+});
+
+Route::get("/test", function() {
+    //return User::query()->where("id", "=", 2)->first()->carts;
+    return User::query()->where("id", "=", 1)->get()->first()->carts()->attach(1)->get();
 });
 
 Route::view("/", "index");

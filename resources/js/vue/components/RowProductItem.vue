@@ -12,18 +12,34 @@
                 class="col-10 col-md-6 col d-flex align-items-start justify-content-center flex-column"
             >
                 <h3 class="card-title text-nowrap mb-2">
-                    {{ pizzaInfo.name }}
+                    {{ productInfo.name }}
                 </h3>
                 <p class="card-text">
-                    {{ pizzaInfo.desc }}
+                    {{ productInfo.desc }}
                 </p>
 
                 <div
                     class="d-flex justify-content-between align-items-center mb-2"
                 >
                     <div class="h6 me-2">Price:</div>
-                    <div class="fw-bold h5">{{ pizzaInfo.price }} Rub.</div>
+                    <div class="fw-bold h5">{{ productInfo.price }} Rub.</div>
                 </div>
+            </div>
+
+            <div
+                class="col-2 d-flex flex-column align-items-center justify-content-center"
+            >
+                <button class="btn btn-success" @click="incrementCount">
+                    +
+                </button>
+                <span>{{ productInfo.count }}</span>
+                <button
+                    class="btn btn-danger"
+                    :class="{ disabled: productInfo.count == 1 }"
+                    @click="decrementCount"
+                >
+                    -
+                </button>
             </div>
 
             <div class="col-1 d-flex align-items-center justify-content-end">
@@ -37,9 +53,9 @@
 
 <script>
 export default {
-    name: "PizzaItem",
+    name: "ProductItem",
     props: {
-        pizzaInfo: {
+        productInfo: {
             required: true,
             type: Object,
         },
@@ -48,7 +64,25 @@ export default {
         removeFromCart() {
             axios
                 .post("/api/cart/remove", {
-                    id: this.pizzaInfo.id,
+                    id: this.productInfo.id,
+                })
+                .then((response) => {
+                    this.$emit("refresh");
+                });
+        },
+        incrementCount() {
+            axios
+                .post("/api/cart/increment-count", {
+                    id: this.productInfo.id,
+                })
+                .then((response) => {
+                    this.$emit("refresh");
+                });
+        },
+        decrementCount() {
+            axios
+                .post("/api/cart/decrement-count", {
+                    id: this.productInfo.id,
                 })
                 .then((response) => {
                     this.$emit("refresh");

@@ -3,26 +3,26 @@
         <div class="card h-100">
             <img src="/images/pizza-img.jpg" class="card-img-top" alt="" />
             <div class="card-body">
-                <h3 class="card-title">{{ pizzaInfo.name }}</h3>
+                <h3 class="card-title">{{ productInfo.name }}</h3>
                 <p class="card-text pizza-desc mb-3" style="min-height: 70px">
-                    {{ pizzaInfo.desc }}
+                    {{ productInfo.desc }}
                 </p>
                 <div
                     class="d-flex justify-content-between align-items-center mb-2"
                 >
                     <div class="h6">Price:</div>
-                    <div class="fw-bold h5">{{ pizzaInfo.price }} Rub.</div>
+                    <div class="fw-bold h5">{{ productInfo.price }} Rub.</div>
                 </div>
 
                 <button
                     :class="{
-                        disabled: pizzaInfo.in_cart,
-                        'btn-danger text-danger': pizzaInfo.in_cart,
+                        disabled: productInfo.in_cart,
+                        'btn-danger text-danger': productInfo.in_cart,
                     }"
                     class="btn btn-outline-primary"
                     @click="addToCart"
                 >
-                    <span v-if="pizzaInfo.in_cart"> Already in cart </span>
+                    <span v-if="productInfo.in_cart"> Already in cart </span>
                     <span v-else>Add to cart</span>
                 </button>
             </div>
@@ -32,9 +32,9 @@
 
 <script>
 export default {
-    name: "PizzaItem",
+    name: "ProductItem",
     props: {
-        pizzaInfo: {
+        productInfo: {
             required: true,
             type: Object,
         },
@@ -43,7 +43,7 @@ export default {
         addToCart() {
             axios
                 .post("/api/cart/add", {
-                    id: this.pizzaInfo.id,
+                    id: this.productInfo.id,
                 })
                 .then((response) => {
                     this.$emit("refresh");
@@ -52,7 +52,7 @@ export default {
         removeFromCart() {
             axios
                 .post("/api/cart/remove", {
-                    id: this.pizzaInfo.id,
+                    id: this.productInfo.id,
                 })
                 .then((response) => {
                     this.$emit("refresh");

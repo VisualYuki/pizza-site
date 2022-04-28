@@ -8,79 +8,98 @@ use http\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CartController extends Controller
-{
-    public function index()
-    {
+class CartController extends Controller {
+    public function index() {
         return $this->getItems()->get();
     }
 
-    public function add(Request $request)
-    {
-        $userId = $_COOKIE["userId"];
+    public function getItems() {
+        $userId = UserController::getUserId();
+        $result = DB::table("carts")->where("user_id", "=", $userId)->leftJoin("products", "carts.product_id", "=", "products.id");
 
-        DB::table("carts")->updateOrInsert([
-            "user_id" => $userId,
-            "product_id" => $request->id
+        return $result;
+    }
+
+    public function countHelper($productId, $action = "increment") {
+        $userId = UserController::getUserId();
+        $dbRow = DB::table("carts")->where("user_id", "=", $userId, "and")->where("product_id", $productId);
+        $count = $dbRow->value("count");
+
+        if ($action = "increment") {
+            $count++;
+        } elseif ($action = "decrement") {
+            $count--;
+        }
+
+        $dbRow->update([
+            "count" => $count
         ]);
     }
 
-    public function remove(Request $request)
-    {
-        $userId = $_COOKIE["userId"];
-
-        DB::table("carts")->where("user_id", $userId)-> where("product_id", "=", $request->id)->delete();
-        //DB::table("products")->where("id", $request->id)->update(["in_cart" => 0]);
+    public function incrementCount(Request $request) {
+        $this->countHelper($request->id);
     }
 
-    public function count(Request $request)
-    {
-        return $this->getItems()->count();
+    public function decrementCount(Request $request) {
+        $this->countHelper($request->id, "decrement");
     }
 
-    public function totalPrice()
-    {
-        return $this->getItems()->sum("price");
+    public function add(Request $request) {
+        $userId = UserController::getUserId();
+
+        DB::table("carts")->updateOrInsert([
+            "user_id" => $userId,
+            "product_id" => $request->id,
+            "count" => 1
+        ]);
     }
 
-    public function getItems()
-    {
-        $userId = $_COOKIE["userId"];
+    public function remove(Request $request) {
+        $userId = UserController::getUserId();
 
-        return DB::table("carts")->where("user_id", "=", $userId)->leftJoin("products", "carts.product_id", "=", "products.id");
+        DB::table("carts")->where("user_id", $userId)->where("product_id", "=", $request->id)->delete();
     }
 
-    public function buy(Request $request)
-    {
+    public function totalPrice() {
+        $result = 0;
+
+        foreach ($this->getItems()->get() as $item) {
+            $result += $item->count * $item->price;
+        }
+
+        return $result;
+    }
+
+    public function buy(Request $request) {
         $request->validate([
             "name" => "required",
             "phone" => "required|digits:11",
             "street" => "required|min:5"
         ]);
 
-        $userId = $_COOKIE["userId"];
+        $userId = UserController::getUserId();
         $totalPrice = $this->totalPrice();
 
         $orderId = DB::table("orders")->insertGetId([
-            "order_id" => null,
+            "id" => null,
             "user_id" => $userId,
             "total_price" => $totalPrice,
             "registration_date" => date("d.m.y H:i"),
             "phone" => $request->phone,
             "name" => $request->name,
             "street" => $request->street,
-
         ]);
 
         $productItems = $this->getItems()->get();
 
         foreach ($productItems as $productItem) {
-            DB::table("product-orders")->insert([
+            DB::table("product_orders")->insert([
                 "order_id" => $orderId,
-                "product_id" => $productItem->product_id
+                "product_id" => $productItem->product_id,
+                "count" => $productItem->count
             ]);
         }
 
-        DB::table("carts")->where("user_id", "=", $userId)->delete();
+        DB::table("carts")->where("id", "=", $userId)->delete();
     }
 }
