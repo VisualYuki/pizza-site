@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Order;
 use Illuminate\Support\Facades\DB;
-use stdClass;
 
 class OrderController extends Controller {
 
     public function index() {
-        $result = [];
         $userId = UserController::getUserId();
-
         $userOrders = DB::table("orders")->where("user_id", $userId)->get();
 
-        foreach($userOrders as $userOrder) {
-            $orderProducts = DB::table("product_orders")->where("order_id",$userOrder->id)->leftJoin("products", "product_orders.product_id", "=", "products.id")->get();
+        foreach ($userOrders as $userOrder) {
+            $orderProducts = Order::query()->find($userOrder->id)->first()->products;
+
+            foreach ($orderProducts as $orderProduct) {
+                $orderProduct->count = $orderProduct->getOriginal()["pivot_count"];
+            }
+
             $userOrder->products = $orderProducts;
         }
 

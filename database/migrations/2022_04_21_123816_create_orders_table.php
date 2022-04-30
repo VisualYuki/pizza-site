@@ -13,7 +13,7 @@ class CreateOrdersTable extends Migration {
     public function up() {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string("user_id");
+            $table->foreignId("user_id")->constrained();
             $table->string("total_price");
             $table->string("registration_date");
             $table->string("phone");

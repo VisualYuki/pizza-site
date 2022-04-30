@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductOrdersTable extends Migration {
+class CreateProductOrderTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('product_orders', function (Blueprint $table) {
+        Schema::create('product_order', function (Blueprint $table) {
             $table->id();
-            $table->string("order_id");
-            $table->string("product_id");
+            $table->foreignId("product_id")->constrained("products");
+            $table->foreignId("order_id")->constrained("orders");
             $table->string("count");
         });
     }
@@ -25,6 +25,6 @@ class CreateProductOrdersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('product_orders');
+        Schema::dropIfExists('product_order');
     }
 }

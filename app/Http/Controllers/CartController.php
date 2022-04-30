@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Product;
-use http\Cookie;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +13,7 @@ class CartController extends Controller {
 
     public function getItems() {
         $userId = UserController::getUserId();
-        $result = DB::table("carts")->where("user_id", "=", $userId)->leftJoin("products", "carts.product_id", "=", "products.id");
+        $result = User::query()->find($userId)->carts()->leftJoin("products", "carts.product_id", "=", "products.id");
 
         return $result;
     }
@@ -25,9 +23,9 @@ class CartController extends Controller {
         $dbRow = DB::table("carts")->where("user_id", "=", $userId, "and")->where("product_id", $productId);
         $count = $dbRow->value("count");
 
-        if ($action = "increment") {
+        if ($action === "increment") {
             $count++;
-        } elseif ($action = "decrement") {
+        } elseif ($action === "decrement") {
             $count--;
         }
 
@@ -37,7 +35,7 @@ class CartController extends Controller {
     }
 
     public function incrementCount(Request $request) {
-        $this->countHelper($request->id);
+        $this->countHelper($request->id, "increment");
     }
 
     public function decrementCount(Request $request) {
@@ -57,7 +55,7 @@ class CartController extends Controller {
     public function remove(Request $request) {
         $userId = UserController::getUserId();
 
-        DB::table("carts")->where("user_id", $userId)->where("product_id", "=", $request->id)->delete();
+        User::query()->find($userId)->carts()->where("product_id", "=", $request->id)->delete();
     }
 
     public function totalPrice() {
@@ -93,13 +91,13 @@ class CartController extends Controller {
         $productItems = $this->getItems()->get();
 
         foreach ($productItems as $productItem) {
-            DB::table("product_orders")->insert([
+            DB::table("product_order")->insert([
                 "order_id" => $orderId,
                 "product_id" => $productItem->product_id,
                 "count" => $productItem->count
             ]);
         }
 
-        DB::table("carts")->where("id", "=", $userId)->delete();
+        User::query()->find($userId)->carts()->delete();
     }
 }

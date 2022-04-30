@@ -9,9 +9,8 @@ class User extends Model {
     use HasFactory;
 
     public function carts() {
-        return $this->hasMany(Cart::class, "id", "id");
+        return $this->hasMany(Cart::class, "user_id", "id");
     }
-
 }
 
 
