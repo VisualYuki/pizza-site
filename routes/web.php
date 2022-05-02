@@ -26,35 +26,19 @@ Route::get("/view-sql", function (Request $request) {
 
 Route::get("/test", function () {
     //dd(\App\Models\Order::query()->find(1)->first()->products()->first()->pivot);
-    //return User::query()->find(1)->carts();
+    //return User::query()->find(1)->carts;
+    //Storage::disk('public')->put('images/pizza-img.jpg', 'Contents');
+    //return asset("storage/pizza-img.jpg");
+
+    //return  date("d.m.y H:i");
+
 });
 
-Route::group(["prefix" => "administrator"], function () {
-    $products = DB::table("products")->get();
-
+Route::group(["prefix" => "administrator", "namespace" => "Admin"], function () {
     Route::view('/', "admin.pages.index")->name("administrator");
-    Route::view('/products', "admin.pages.products", compact("products"))->name("administrator-products");
-    Route::get("/products/edit/{id}", function ($id) {
-        $product = DB::table("products")->find($id);
-        $action = "update";
-        return view("admin.pages.product-edit", compact("id", "product", "action"));
-    })->name("administrator-product-edit");
-
-    Route::get("/products/create", function () {
-        $action = "create";
-        return view("admin.pages.product-edit", compact("action"));
-    })->name("administrator-product-create");
-
-    Route::post("/products/update", "ProductController@update")->name("administrator-product-update");
-    Route::post("/products/create/save", "ProductController@create")->name("administrator-product-create-save");
-    //Route::view('/products/update', "admin.pages.products", compact("products"))->name("administrator-products");
+    Route::resource("products", "ProductController");
 });
-//Route::prefix("administrator")->group(function() {
-//    Route::view('/', "admin.pages.index");
-//    Route::view('/products', "admin.pages.products");
-//});
 
-//Route::view("/administration", "admin.pages.index");
 Route::view("/", "index");
 Route::view("/{page}", "index");
 

@@ -77,7 +77,6 @@ class CartController extends Controller {
 
         $userId = UserController::getUserId();
         $totalPrice = $this->totalPrice();
-
         $orderId = DB::table("orders")->insertGetId([
             "id" => null,
             "user_id" => $userId,

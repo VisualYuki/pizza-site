@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <img
-                    src="/images/pizza-img.jpg"
+                    :src="productInfo.image"
                     class="d-md-block d-none"
                     style="height: 150px"
                 />

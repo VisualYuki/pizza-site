@@ -1,7 +1,7 @@
 <template>
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card h-100">
-            <img src="/images/pizza-img.jpg" class="card-img-top" alt="" />
+            <img :src="productInfo.image" class="card-img-top" alt=""/>
             <div class="card-body">
                 <h3 class="card-title">{{ productInfo.name }}</h3>
                 <p class="card-text pizza-desc mb-3" style="min-height: 70px">

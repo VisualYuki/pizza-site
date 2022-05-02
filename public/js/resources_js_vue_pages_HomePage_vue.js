@@ -711,7 +711,7 @@ var render = function () {
     _c("div", { staticClass: "card h-100" }, [
       _c("img", {
         staticClass: "card-img-top",
-        attrs: { src: "/images/pizza-img.jpg", alt: "" },
+        attrs: { src: _vm.productInfo.image, alt: "" },
       }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
