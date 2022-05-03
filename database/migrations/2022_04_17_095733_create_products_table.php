@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration {
             $table->id()->autoIncrement();
             $table->string("name")->default("pizza-name-");
             $table->string("desc")->default("pizza-desc-");
-            $table->smallInteger("price")->default(999);
-            $table->string("image");
+            $table->unsignedSmallInteger("price");
+            $table->string("image")->nullable();
             $table->softDeletes();
             $table->timestamps();
             //$table->boolean("in_cart")->default(0);

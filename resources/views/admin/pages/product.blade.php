@@ -14,39 +14,39 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="name">Name</label>
+
                     <input type="text" name="name" class="form-control" id="name"
-                           value="{{$action == "update" ? $productData->name: ""}}">
+                           value="{{old('name', $action == "update" ? $productData->name: "")}}">
+                    @error("name")
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="desc">Desc</label>
                     <textarea name="desc" id="desc" cols="30" class="form-control"
-                              rows="3">{{$action == "update" ? $productData->desc: ""}}</textarea>
+                              rows="3">{{old('desc', $action == "update" ? $productData->desc: "")}}</textarea>
+                    @error("desc")
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
                     <input type="text" name="price" class="form-control" id="price"
-                           value="{{$action == "update" ? $productData->price: ""}}">
+                           value="{{old("price", $action == "update" ? $productData->price: "")}}">
+                    @error("price")
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
-
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" name="image" class="form-control" id="image"
-                    >
-{{--                    @if($action == "update")--}}
-{{--                        <img src="{{$productData->image}}"/>--}}
-{{--                    @endif--}}
+                    <input type="file" name="image" class="form-control" id="image">
                 </div>
-
-
-                {{--                value="{{$action == "update" ? $productData->image: ""}}"--}}
             </div>
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">
-                    {{
-                        ($action == "update") ? "Update" : "Create"
-                    }}
+                    {{($action == "update") ? "Update" : "Create"}}
                 </button>
 
             </div>

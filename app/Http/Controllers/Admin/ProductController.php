@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\DB;
@@ -27,10 +28,14 @@ class ProductController extends Controller {
     }
 
     public function storeUpdateHelper($action, $request, $id = 0) {
-        $imgPath = Storage::putFile("products", $request->file("image"));
         $params = $request->all(["name", "desc", "price", "image"]);
 
-        $params["image"] = $imgPath;
+        if (!is_null($params["image"])) {
+            $imgPath = Storage::putFile("products", $request->file("image"));
+            $params["image"] = $imgPath;
+        } else {
+            unset($params["image"]);
+        }
 
         if ($action == "store") {
             DB::table("products")->insert($params);
@@ -46,7 +51,7 @@ class ProductController extends Controller {
      *
      * @param \Illuminate\Http\Request $request
      */
-    public function store(Request $request) {
+    public function store(ProductRequest $request) {
         return $this->storeUpdateHelper("store", $request);
     }
 
@@ -56,7 +61,7 @@ class ProductController extends Controller {
      * @param \Illuminate\Http\Request $request
      * @param int $id
      */
-    public function update(Request $request, $id) {
+    public function update(ProductRequest $request, $id) {
         return $this->storeUpdateHelper("update", $request, $id);
     }
 
@@ -88,7 +93,7 @@ class ProductController extends Controller {
         Product::find($id)->delete();
         //$product = Product::find($id);
         //Storage::delete($product->image);
-        DB::table("products")->where("id", $id)->delete();
+        //DB::table("products")->where("id", $id)->delete();
 
         return redirect()->route('products.index');
     }
