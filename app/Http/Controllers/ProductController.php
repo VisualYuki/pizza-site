@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller {
     public function index() {
         $userId = UserController::getUserId();
-        $allProducts = Product::all();
+        $allProducts = Product::custom_all();
         $cartProducts = DB::table("carts")->where("user_id", $userId)->get();
 
         foreach ($allProducts as $product) {

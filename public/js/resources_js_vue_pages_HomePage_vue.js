@@ -43,6 +43,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductItem",
   props: {
@@ -151,7 +163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".pizza-desc[data-v-5f35e9b0] {\n  margin: 0;\n  -webkit-line-clamp: 3;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".pizza-desc[data-v-5f35e9b0] {\n  margin: 0;\n  -webkit-line-clamp: 3;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n}\n.labels[data-v-5f35e9b0] {\n  position: absolute;\n  left: 10px;\n  top: 10px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -713,6 +725,26 @@ var render = function () {
         staticClass: "card-img-top",
         attrs: { src: _vm.productInfo.image, alt: "" },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "labels" }, [
+        _vm.productInfo.hit
+          ? _c("div", { staticClass: "badge bg-danger fs-5" }, [
+              _vm._v("\n                Хит продаж\n            "),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.productInfo.new
+          ? _c("div", { staticClass: "badge bg-warning fs-5" }, [
+              _vm._v("\n                Новое\n            "),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.productInfo.recommend
+          ? _c("div", { staticClass: "badge bg-info fs-5" }, [
+              _vm._v("\n                Рекомендовано\n            "),
+            ])
+          : _vm._e(),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("h3", { staticClass: "card-title" }, [

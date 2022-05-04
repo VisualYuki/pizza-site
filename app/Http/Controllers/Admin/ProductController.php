@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use App\Models\ProductLabel;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -38,9 +39,31 @@ class ProductController extends Controller {
         }
 
         if ($action == "store") {
-            DB::table("products")->insert($params);
+            $id = DB::table("products")->insert($params);
         } elseif ($action == "update") {
             DB::table("products")->where("id", $id)->update($params);
+        }
+
+        $params = $request->all(["hit", "recommend", "new"]);
+
+        if ($params["hit"] || $params["new"] || $params["recommend"]) {
+            if (ProductLabel::query()->find( $id)->count()) {
+                ProductLabel::find($id)->update([
+                    "product_id" => $id,
+                    "hit" => $params["hit"],
+                    "new" => $params["new"],
+                    "recommend" => $params["recommend"]
+                ]);
+            } else {
+                ProductLabel::create([
+                    "product_id" => $id,
+                    "hit" => $params["hit"],
+                    "new" => $params["new"],
+                    "recommend" => $params["recommend"]
+                ]);
+            }
+        } else {
+            ProductLabel::findOrFail($id)->delete();
         }
 
         return redirect()->route('products.index');
@@ -79,7 +102,8 @@ class ProductController extends Controller {
      * @param int $id
      */
     public function edit($product) {
-        $productData = DB::table("products")->find($product);
+        //$productData = DB::table("products")->find($product);
+        $productData = Product::custom_all()->find($product);
         $action = "update";
         return view("admin.pages.product", compact("product", "productData", "action"));
     }

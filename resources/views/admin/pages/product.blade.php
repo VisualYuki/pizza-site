@@ -42,6 +42,17 @@
                     <label for="image">Image</label>
                     <input type="file" name="image" class="form-control" id="image">
                 </div>
+
+                @foreach(["hit" => "Хит продаж", "new" => "Новое", "recommend" => "Рекомендовано"] as $field => $title)
+                    <div class="form-check">
+                        <input class="form-check-input" id="{{$field}}" type="checkbox" name="{{$field}}"
+                               @if(isset($productData) && $productData->$field) checked @endif>
+                        <label class="form-check-label" for="{{$field}}">
+                            {{$title}}
+                        </label>
+                    </div>
+                @endforeach
+
             </div>
 
             <div class="card-footer">

@@ -1,7 +1,19 @@
 <template>
     <div class="col-12 col-sm-6 col-md-4">
         <div class="card h-100">
-            <img :src="productInfo.image" class="card-img-top" alt=""/>
+            <img :src="productInfo.image" class="card-img-top" alt="" />
+            <div class="labels">
+                <div class="badge bg-danger fs-5" v-if="productInfo.hit">
+                    Хит продаж
+                </div>
+                <div class="badge bg-warning fs-5" v-if="productInfo.new">
+                    Новое
+                </div>
+                <div class="badge bg-info fs-5" v-if="productInfo.recommend">
+                    Рекомендовано
+                </div>
+            </div>
+
             <div class="card-body">
                 <h3 class="card-title">{{ productInfo.name }}</h3>
                 <p class="card-text pizza-desc mb-3" style="min-height: 70px">
@@ -69,5 +81,11 @@ export default {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.labels {
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 </style>

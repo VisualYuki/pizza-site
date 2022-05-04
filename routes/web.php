@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\DB;
 
-
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,8 @@ Route::get("/test", function () {
     //return asset("storage/pizza-img.jpg");
 
     //return  date("d.m.y H:i");
+    //dd(Product::custom_all());
+    //dd(Product::where("id", 1)->first());
 
 });
 
