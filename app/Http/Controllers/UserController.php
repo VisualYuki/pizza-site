@@ -10,10 +10,8 @@ class UserController extends Controller {
         $userId = $request->userId;
 
         if (is_null($userId)) {
-            DB::table("users")->insertGetId(["id" => null]);
+            $userId = DB::table("users")->insertGetId(["id" => null]);
         }
-
-        $userId = DB::table("users")->get()->first()->id;
 
         return response($userId)->cookie("userId", $userId);
     }

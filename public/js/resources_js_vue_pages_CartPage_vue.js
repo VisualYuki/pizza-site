@@ -214,9 +214,9 @@ __webpack_require__.r(__webpack_exports__);
       totalPrice: 0,
       isLoading: true,
       form: {
-        name: "denis",
-        phone: "89123323010",
-        street: "street for delivary",
+        name: "",
+        phone: "",
+        street: "",
         comment: null
       },
       isError: false,
