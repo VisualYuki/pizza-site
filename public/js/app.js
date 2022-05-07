@@ -5302,6 +5302,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   mounted: function mounted() {
@@ -27967,6 +27974,8 @@ var render = function () {
     [
       _c("header", { staticClass: "d-flex justify-content-center py-3" }, [
         _c("ul", { staticClass: "nav nav-pills" }, [
+          _vm._m(0),
+          _vm._v(" "),
           _c(
             "li",
             { staticClass: "nav-item" },
@@ -28026,7 +28035,23 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link router-link-exact-active",
+          attrs: { href: "/administrator/products" },
+        },
+        [_vm._v("Admin products")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
