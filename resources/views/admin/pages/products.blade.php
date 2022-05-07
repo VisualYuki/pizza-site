@@ -41,6 +41,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{$products->links()}}
+    </div>
     <a href="{{route("products.create")}}" class="btn btn-primary">
         Create product
     </a>

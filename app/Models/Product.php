@@ -26,6 +26,10 @@ class Product extends Model {
                 $product->new = $labels->new;
                 $product->recommend = $labels->recommend;
             }
+
+            if(is_null($product->image)) {
+                $product->image = "images/no-image.png";
+            }
         }
 
         return $products;

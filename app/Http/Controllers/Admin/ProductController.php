@@ -15,8 +15,9 @@ class ProductController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        //$products = DB::table("products")->get();
-        $products = Product::all();
+        $products = DB::table("products")->paginate(4);
+        //$products = Product::custom_all();
+
         return view("admin.pages.products", compact("products"));
     }
 
@@ -33,6 +34,7 @@ class ProductController extends Controller {
 
         if (!is_null($params["image"])) {
             $imgPath = Storage::putFile("products", $request->file("image"));
+            Storage::delete(Product::find($id)->image);
             $params["image"] = $imgPath;
         } else {
             unset($params["image"]);
@@ -47,7 +49,7 @@ class ProductController extends Controller {
         $params = $request->all(["hit", "recommend", "new"]);
 
         if ($params["hit"] || $params["new"] || $params["recommend"]) {
-            if (ProductLabel::query()->find( $id)->count()) {
+            if (ProductLabel::query()->find($id)->count()) {
                 ProductLabel::find($id)->update([
                     "product_id" => $id,
                     "hit" => $params["hit"],
@@ -63,7 +65,9 @@ class ProductController extends Controller {
                 ]);
             }
         } else {
-            ProductLabel::findOrFail($id)->delete();
+            if (ProductLabel::where("id", $id)->count()) {
+                ProductLabel::find($id)->delete();
+            }
         }
 
         return redirect()->route('products.index');

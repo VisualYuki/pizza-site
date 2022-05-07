@@ -3,6 +3,13 @@
         <header class="d-flex justify-content-center py-3">
             <ul class="nav nav-pills">
                 <li class="nav-item">
+                    <a
+                        class="nav-link router-link-exact-active"
+                        href="/administrator/products"
+                        >Admin products</a
+                    >
+                </li>
+                <li class="nav-item">
                     <router-link
                         to="/home"
                         class="nav-link"
